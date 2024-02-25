@@ -1,17 +1,40 @@
-import { useEffect } from 'react'
-import './App.css'
+import { useEffect } from "react";
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import BookingPage from "./pages/BookingPage/BookingPage";
+import { checkLogin } from "./store/slices/user.slice";
+import { useAppDispatch } from "./store/store";
+import Register from "./pages/Auth/Register";
+import Login from "./pages/Auth/Login";
+import AuthWrapper from "./layouts/AuthWrapper";
 
 function App() {
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log("triggering app component")
-  })
+    (async function( ) { 
+      await dispatch(checkLogin());
+     })()
+  }, [dispatch]);
 
   return (
-    <>
-    Hello World
-    </>
-  )
+    <Routes>
+      <Route path="/appointment/schedule" element={<BookingPage />} />
+
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+
+      <Route
+        path="/dashboard"
+        element={
+          <AuthWrapper>
+            <Dashboard />
+          </AuthWrapper>
+        }
+      />
+    </Routes>
+  );
 }
 
-export default App
+export default App;

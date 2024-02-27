@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    width: 100%;
+    background-color: #001F54;
+    min-height: 100vh;
+}
+
+.left {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.hero {
+    width: 80%;
+    margin-top: 30%;
+}
+
+.hero h2 {
+    color: white;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    align-items: center;
+    padding-top: 180px;
+}
+
+.userTypeContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.inputCustom {
+    border-radius: 0;
+    background-color: #F4F7F9;
+}
+
+.formContainer {
+    width: 50%;
+}
+
+.submitBtn {
+    background-color: #001F54;
+    border-radius: 0;
+}

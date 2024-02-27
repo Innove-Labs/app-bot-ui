@@ -1,23 +1,27 @@
 import { PropsWithChildren, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import { useNavigate } from "react-router-dom";
+import ApiStatus from "../enums";
 
 function AuthWrapper({ children }: PropsWithChildren) {
   const user = useSelector((state: RootState) => state.user);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user || (user && !user.isLoggedIn)) {
-      // logic for checking the login using the cookies
-      // much like auth local
+    if (
+      (user.status == ApiStatus.FAILED || user.status === ApiStatus.SUCCESS) &&
+      !user.isLoggedIn
+    ) {
+      navigate("/login");
     }
-  }, [user]);
+  }, [user.status, user.isLoggedIn, navigate]);
 
-  if (user.isLoading) {
-    <>Spinner weeee</>;
+  if (user.status === ApiStatus.PENDING) {
+    // spinner needs to be added
+    return <>Spinner weeee</>;
   } else if (user.isLoggedIn) {
-    <>{children}</>;
-  } else {
-    <>Login page byatch</>;
+    return <>{children}</>;
   }
 }
 

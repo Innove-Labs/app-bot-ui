@@ -8,14 +8,15 @@ import { useAppDispatch } from "./store/store";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import AuthWrapper from "./layouts/AuthWrapper";
+import Wrapper from "./layouts/Wrapper";
 
 function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    (async function( ) { 
+    (async function () {
       await dispatch(checkLogin());
-     })()
+    })();
   }, [dispatch]);
 
   return (
@@ -29,7 +30,7 @@ function App() {
         path="/dashboard"
         element={
           <AuthWrapper>
-            <Dashboard />
+              <Wrapper><Dashboard /></Wrapper>
           </AuthWrapper>
         }
       />
